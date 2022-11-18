@@ -29,6 +29,20 @@ th {
   flex-direction: column;
   align-items: center;
 }
+.page_get_user table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+}
+.page_get_user td,
+th {
+  width: 15%;
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
 .page_create_user {
   display: flex;
   flex-direction: column;
