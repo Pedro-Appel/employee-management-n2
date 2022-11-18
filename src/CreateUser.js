@@ -1,16 +1,15 @@
 import './styles/style.css';
 import NavigationButton from './components/NavigationButton';
-import { useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 
 const baseURL = `https://mack-webmobile.vercel.app/api/users`;
 
 export function CreateUser(){
+  const navigate = useNavigate()
   function createEmployee(event){
     const formData = new FormData(event.target);
-
     const json = JSON.stringify(Object.fromEntries(formData.entries()));
 
-    console.log(json)
     fetch(baseURL, {
       method: 'POST',
       mode: 'cors',
@@ -23,8 +22,11 @@ export function CreateUser(){
       referrerPolicy: 'no-referrer',
       body: json 
     })
-    .then((res)=>console.log(JSON.stringify(res)))
+    .then(setTimeout(function() {
+      navigate('/')
+    }, 1000))
 
+    event.preventDefault();
   }
 
   return (
