@@ -6,7 +6,6 @@ const baseURL = `https://mack-webmobile.vercel.app/api/users`;
 
 export function CreateUser(){
   const navigate = useNavigate()
-  
   function createEmployee(event){
     const formData = new FormData(event.target);
     const json = JSON.stringify(Object.fromEntries(formData.entries()));
