@@ -1,0 +1,10 @@
+{
+  "/api": {
+    "target": "https://mack-webmobile.vercel.app",
+    "secure": false,
+    "pathRewrite": {
+      "/endpoint": "https://mack-webmobile.vercel.app"
+    },
+    "changeOrigin": true
+  }
+}
