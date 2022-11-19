@@ -36,7 +36,7 @@ export function CreateUser(){
     });
     if (response.ok) {
       setTimeout(function() {
-        navigate('/')
+        // navigate('/')
       }, 1000)
     };
   }
