@@ -77,55 +77,60 @@ export function ListUser() {
       <div className="page-buttons">
         <div className="page-button-container">
           <NavigationButton
+            class="option-button"
             routeToNavigate="/create"
-            name="Adicionar Funcionario"
+            name="Adicionar Funcionário"
           />
         </div>
         <div className="page-button-container">
-          <button onClick={retrieveEmployees}>Buscar Funcionarios</button>
+          <button className="navigate-button" onClick={() => buscarUsuarios()}>
+            Atualizar Funcionários
+          </button>
         </div>
       </div>
-      {error && <h1>Error!</h1>}
-      {loading && <h1>Loading...</h1>}
-      {
-        <div className="page-tables">
-          <table className="page__table">
-            <thead>
-              <tr >
-                <th>Name</th>
-                <th>Email</th>
-                <th>Salary</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>See Details</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            {employees.map((e) => {
-              return (
-                <tbody>
-                  <tr>
-                    <td>{e.name}</td>
-                    <td>{e.email}</td>
-                    <td>{e.salary}</td>
-                    <td>{e.date}</td>
-                    <td>{e.status}</td>
-                    <td>
-                      <NavigationButton
-                        routeToNavigate={`/get/${e._id}`}
-                        name="Ver Detalhes"
-                      />
-                    </td>
-                    <td>
-                      <button onClick={() => removeEmployees(e._id)}></button>
-                    </td>
-                  </tr>
-                </tbody>
-              );
-            })}
-          </table>
-        </div>
-    }
+
+      <div className="page-tables">
+        <table className="page__table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Salary</th>
+              <th>Date</th>
+              <th>Status</th>
+              <th>See Details</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          {employees.map((e) => {
+            return (
+              <tbody>
+                <tr>
+                  <td>{e.name}</td>
+                  <td>{e.email}</td>
+                  <td>{e.salary}</td>
+                  <td>{e.date}</td>
+                  <td>{e.status}</td>
+                  <td>
+                    <NavigationButton
+                      class="navigate-button"
+                      routeToNavigate={`/get/${e._id}`}
+                      name="Ver Detalhes"
+                    />
+                  </td>
+                  <td>
+                    <button
+                      className="delete-button"
+                      onClick={() => deleteUser(e._id)}
+                    >
+                      X
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            );
+          })}
+        </table>
       </div>
     </>
   );

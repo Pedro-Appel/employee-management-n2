@@ -1,0 +1,32 @@
+button, .option-button{
+    border: none;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    cursor: pointer;
+    filter: drop-shadow(0px 0.5px 3px rgba(126, 126, 126, 0.867));
+}
+
+.navigate-button{
+    background-color: #008CBA;
+    padding: 10px 27px;
+}
+
+.delete-button{
+    background-color: #f44336;
+    width: 25px;
+    height: 25px;
+}
+
+.back-button{
+    background-color: #f44336;
+    padding: 10px 27px;
+}
+
+.option-button{
+    background-color: #4CAF50;
+    padding: 10px 27px;
+}

@@ -1,26 +1,22 @@
-.page {
-  font-family: "Roboto Condensed", sans-serif;
+.page-tables{
+    display: flex;
+    flex-direction: column;
 }
 
-.page-title,
-.options-title,
-.page-buttons {
-  text-align: center;
+.page__table{
+    border-collapse: collapse;
 }
 
-.page-buttons {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+.page__table th, td{
+    text-align: center;
+    width: 15%;
 }
 
-.page-tables {
-  display: flex;
-  flex-direction: column;
+.page__table tr{
+    filter: drop-shadow(0px 0.5px 3px rgba(126, 126, 126, 0.867));
+    border-bottom: 1px solid black;
 }
 
-.page-table th,
-td {
-  text-align: center;
-  width: 15%;
+.page__table tbody{
+    height: 7vh;
 }
