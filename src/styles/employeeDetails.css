@@ -1,0 +1,16 @@
+.card-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+}
+.card-container img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+.card{
+    border: 1.5px solid #dddd;
+    border-radius: 10px;
+    text-align: center;
+    padding: 3%;
+}
