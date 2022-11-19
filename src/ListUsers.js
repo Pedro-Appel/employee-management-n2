@@ -1,33 +1,75 @@
 import "./styles/style.css";
 import "./styles/employeeTable.css";
-import "./styles/buttons.css";
-import { useState, useEffect } from "react";
+import { useCallback, useState, useEffect} from "react";
 import NavigationButton from "./components/NavigationButton";
-import useFetch from "use-http";
-import { resolvePath } from "react-router-dom";
+import useFetch from 'use-http'
 
 const baseURL = `https://mack-webmobile.vercel.app/api/users`;
 
 export function ListUser() {
+
   const [employees, setEmployees] = useState([]);
+  const options = {};
+  const { 
+    get, 
+    response, 
+    loading, 
+    error, 
+    data = [] 
+  } = useFetch(`https://mack-webmobile.vercel.app/api/users`, options, [])
 
-  function buscarUsuarios() {
-    fetch(baseURL)
-      .then((response) => response.json())
-      .then((data) => setEmployees(data));
+  function retrieveEmployees(){
+    console.log("retrieving ...")
+    fetch(baseURL).then((res)=> res.json())
+    .then((res) => setEmployees(res))
+  }
+  function removeEmployees(id){
+    fetch(baseURL+`/${id}`, {method: 'DELETE'})
+    .then((res)=> res.json()).then(removeEmployees())
   }
 
-  function deleteUser(id) {
-    fetch(baseURL + `/${id}`, { method: "DELETE" })
-      .then((res) => console.log(res))
-      .then(() => buscarUsuarios());
-  }
+  useEffect(()=>{
+    retrieveEmployees()
+  },[])
 
-  useEffect(() => {
-    buscarUsuarios();
-  }, []);
+  // useEffect(() => {
+  //   // console.log("First Fetch", data)
+  //   if(loading){
+  //     console.log("loading...")
+  //   }
+  //   if(error){
+  //     console.log("error...")
+  //   }
+  //   if(data !== [] && employees === []){
+  //     setEmployees(data)
+      
+  //   }
+  //   else{
+  //     loadEmployees()
+
+  //   }
+  // }, [error, loading, data, employees]) 
+
+
+  // async function loadEmployees(){
+  //   const newEmployees = await get()
+  //   console.log("Dentro da busca ",newEmployees)
+    
+  //   setTimeout(function() {
+  //     setEmployees(newEmployees)
+  //   }, 500)
+  // }
+  // async function removeEmployee(e) {
+  //   fetch(baseURL+`/${e}`, {method: 'DELETE'})
+    
+  //   setTimeout(function() {
+  //     setEmployees([])
+  //   }, 500)
+  //   }
 
   return (
+    <>
+    
     <div className="page">
       <h1 className="page-title">LISTA DE FUNCIONARIOS</h1>
 
@@ -90,6 +132,6 @@ export function ListUser() {
           })}
         </table>
       </div>
-    </div>
+    </>
   );
 }

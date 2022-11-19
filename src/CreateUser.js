@@ -3,6 +3,8 @@ import "./styles/buttons.css";
 import "./styles/employeeForm.css";
 import NavigationButton from "./components/NavigationButton";
 import { useNavigate } from "react-router-dom";
+import useFetch from 'use-http'
+
 
 const baseURL = `https://mack-webmobile.vercel.app/api/users`;
 
@@ -28,9 +30,21 @@ export function CreateUser() {
         navigate("/");
       }, 1000)
     );
+export function CreateUser(){
 
-    event.preventDefault();
+  const navigate = useNavigate()
+  const opt = {
+    method: 'POST',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer'
   }
+  const { post, response  } = useFetch(baseURL)
 
   return (
     <div className="page">
