@@ -68,8 +68,6 @@ export function ListUser() {
   //   }
 
   return (
-    <>
-    
     <div className="page">
       <h1 className="page-title">LISTA DE FUNCIONARIOS</h1>
 
@@ -83,7 +81,7 @@ export function ListUser() {
           />
         </div>
         <div className="page-button-container">
-          <button className="navigate-button" onClick={() => buscarUsuarios()}>
+          <button className="navigate-button" onClick={() => retrieveEmployees()}>
             Atualizar Funcionários
           </button>
         </div>
@@ -121,7 +119,7 @@ export function ListUser() {
                   <td>
                     <button
                       className="delete-button"
-                      onClick={() => deleteUser(e._id)}
+                      onClick={() => removeEmployees(e._id)}
                     >
                       X
                     </button>
@@ -132,6 +130,5 @@ export function ListUser() {
           })}
         </table>
       </div>
-    </>
-  );
+  </div>);
 }

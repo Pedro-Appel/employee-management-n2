@@ -3,48 +3,40 @@ import "./styles/buttons.css";
 import "./styles/employeeForm.css";
 import NavigationButton from "./components/NavigationButton";
 import { useNavigate } from "react-router-dom";
-import useFetch from 'use-http'
 
 
 const baseURL = `https://mack-webmobile.vercel.app/api/users`;
 
 export function CreateUser() {
+
   const navigate = useNavigate();
+
   function createEmployee(event) {
+    event.preventdefault()
     const formData = new FormData(event.target);
     const json = JSON.stringify(Object.fromEntries(formData.entries()));
+    setTimeout(function () {
+      console.log(json)
 
-    fetch(baseURL, {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      redirect: "follow",
-      referrerPolicy: "no-referrer",
-      body: json,
-    }).then(
-      setTimeout(function () {
-        navigate("/");
-      }, 1000)
-    );
-export function CreateUser(){
-
-  const navigate = useNavigate()
-  const opt = {
-    method: 'POST',
-    mode: 'cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    redirect: 'follow',
-    referrerPolicy: 'no-referrer'
+      const options = {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: json,
+      };
+      
+      fetch(baseURL, options)
+      navigate("/");
+    }, 1000)
+    
   }
-  const { post, response  } = useFetch(baseURL)
+
 
   return (
     <div className="page">
@@ -106,3 +98,4 @@ export function CreateUser(){
     </div>
   );
 }
+
