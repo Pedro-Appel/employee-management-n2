@@ -3,6 +3,7 @@ import "./styles/buttons.css";
 import "./styles/employeeForm.css";
 import NavigationButton from "./components/NavigationButton";
 import { useNavigate } from "react-router-dom";
+import { useFetch } from "use-http";
 
 
 const baseURL = `https://mack-webmobile.vercel.app/api/users`;
@@ -11,30 +12,36 @@ export function CreateUser() {
 
   const navigate = useNavigate();
 
-  function createEmployee(event) {
-    event.preventdefault()
-    const formData = new FormData(event.target);
-    const json = JSON.stringify(Object.fromEntries(formData.entries()));
-    setTimeout(function () {
-      console.log(json)
+  const opt = {
+    method: 'POST',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer'
+  }
+  const { post, response  } = useFetch(baseURL)
 
-      const options = {
-        method: "POST",
-        mode: "cors",
-        cache: "no-cache",
-        credentials: "same-origin",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        redirect: "follow",
-        referrerPolicy: "no-referrer",
-        body: json,
-      };
-      
-      fetch(baseURL, options)
-      navigate("/");
-    }, 1000)
-    
+  const newUser = async (event) => {
+    const formData = new FormData(event.target);
+    const json = Object.fromEntries(formData.entries());
+    event.preventDefault();
+    await post("", {
+      avatar: json.avatar,
+      date: json.date,
+      email: json.email,
+      name: json.name,
+      salary: json.salary,
+      status: json.status,
+    });
+    if (response.ok) {
+      setTimeout(function() {
+        navigate('/')
+      }, 1000)
+    };
   }
 
 
@@ -42,7 +49,7 @@ export function CreateUser() {
     <div className="page">
       <h1 className="page-title">Criar um Funcionario</h1>
       <div className="form-container">
-        <form className="form" onSubmit={createEmployee}>
+        <form className="form" onSubmit={newUser}>
           <div className="label-container">
             <label>
               <div className="label-title">Name</div>

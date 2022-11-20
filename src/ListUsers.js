@@ -9,28 +9,39 @@ const baseURL = `https://mack-webmobile.vercel.app/api/users`;
 export function ListUser() {
 
   const [employees, setEmployees] = useState([]);
-  const options = {};
+  const options = {cache: 'no-cache'};
   const { 
     get, 
-    response, 
     loading, 
+    response,
     error, 
-    data = [] 
-  } = useFetch(`https://mack-webmobile.vercel.app/api/users`, options, [])
+    data = [],
+  } = useFetch(`https://mack-webmobile.vercel.app/api/users`, options)
+  const useGet = useFetch(`https://mack-webmobile.vercel.app/api/users`, options)
 
-  function retrieveEmployees(){
-    console.log("retrieving ...")
-    fetch(baseURL).then((res)=> res.json())
-    .then((res) => setEmployees(res))
+  async function retrieveEmployees(){
+    console.log("buscando")
+    var newEmployees = await get('')
+    
+    var getResponse = await response.json()
+    console.log("achado: ", getResponse)
+    if(response.ok) setEmployees(...employees, newEmployees)
   }
+
   function removeEmployees(id){
+    console.log("deleting ...")
     fetch(baseURL+`/${id}`, {method: 'DELETE'})
-    .then((res)=> res.json()).then(removeEmployees())
+    .then(setTimeout(function() {
+      retrieveEmployees()
+    }, 500))
   }
 
-  useEffect(()=>{
-    retrieveEmployees()
-  },[])
+  useEffect(() => { loadInitial() }, []) // componentDidMount
+  
+  async function loadInitial() {
+    const initialTodos = await get('')
+    if (response.ok) setEmployees(initialTodos)
+  }
 
   // useEffect(() => {
   //   // console.log("First Fetch", data)
@@ -68,67 +79,71 @@ export function ListUser() {
   //   }
 
   return (
-    <div className="page">
-      <h1 className="page-title">LISTA DE FUNCIONARIOS</h1>
+    <>
+      
+      <div className="page">
+        <h1 className="page-title">LISTA DE FUNCIONARIOS</h1>
 
-      <h2 className="options-title">Opções:</h2>
-      <div className="page-buttons">
-        <div className="page-button-container">
-          <NavigationButton
-            class="option-button"
-            routeToNavigate="/create"
-            name="Adicionar Funcionário"
-          />
+        <h2 className="options-title">Opções:</h2>
+        <div className="page-buttons">
+          <div className="page-button-container">
+            <NavigationButton
+              class="option-button"
+              routeToNavigate="/create"
+              name="Adicionar Funcionário"
+              />
+          </div>
+          <div className="page-button-container">
+            <button className="navigate-button" onClick={retrieveEmployees}>
+              Atualizar Funcionários
+            </button>
+          </div>
         </div>
-        <div className="page-button-container">
-          <button className="navigate-button" onClick={() => retrieveEmployees()}>
-            Atualizar Funcionários
-          </button>
-        </div>
-      </div>
 
-      <div className="page-tables">
-        <table className="page__table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Salary</th>
-              <th>Date</th>
-              <th>Status</th>
-              <th>See Details</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          {employees.map((e) => {
-            return (
-              <tbody>
-                <tr>
-                  <td>{e.name}</td>
-                  <td>{e.email}</td>
-                  <td>{e.salary}</td>
-                  <td>{e.date}</td>
-                  <td>{e.status}</td>
-                  <td>
-                    <NavigationButton
-                      class="navigate-button"
-                      routeToNavigate={`/get/${e._id}`}
-                      name="Ver Detalhes"
-                    />
-                  </td>
-                  <td>
-                    <button
-                      className="delete-button"
-                      onClick={() => removeEmployees(e._id)}
-                    >
-                      X
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            );
-          })}
-        </table>
-      </div>
-  </div>);
+        <div className="page-tables">
+          <table className="page__table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Salary</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>See Details</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            {loading && <div> <h1> Loading....</h1> </div>}
+            {error && <p>ERROR... </p>}
+            {data && 
+            data.map((e) => {
+              return (
+                <tbody>
+                  <tr>
+                    <td>{e.name}</td>
+                    <td>{e.email}</td>
+                    <td>{e.salary}</td>
+                    <td>{e.date}</td>
+                    <td>{e.status}</td>
+                    <td>
+                      <NavigationButton
+                        class="navigate-button"
+                        routeToNavigate={`/get/${e._id}`}
+                        name="Ver Detalhes"
+                        />
+                    </td>
+                    <td>
+                      <button className="delete-button" onClick={()=>removeEmployees(e._id)}>
+                        X
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              );
+            })}
+          </table>
+        </div>
+    </div>
+  </>
+  );
 }
