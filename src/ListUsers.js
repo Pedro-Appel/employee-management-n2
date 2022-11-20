@@ -1,89 +1,51 @@
 import "./styles/style.css";
 import "./styles/employeeTable.css";
-import { useCallback, useState, useEffect} from "react";
+import { useState, useEffect} from "react";
 import NavigationButton from "./components/NavigationButton";
 import useFetch from 'use-http'
 
 const baseURL = `https://mack-webmobile.vercel.app/api/users`;
 
 export function ListUser() {
-
   const [employees, setEmployees] = useState([]);
+
   const options = {cache: 'no-cache'};
   const { 
-    get, 
     loading, 
-    response,
     error, 
-    data = [],
   } = useFetch(`https://mack-webmobile.vercel.app/api/users`, options)
-  const useGet = useFetch(`https://mack-webmobile.vercel.app/api/users`, options)
 
   async function retrieveEmployees(){
-    console.log("buscando")
-    var newEmployees = await get('')
-    
-    var getResponse = await response.json()
-    console.log("achado: ", getResponse)
-    if(response.ok) setEmployees(...employees, newEmployees)
+    fetch(baseURL, options)
+    .then((res)=> res.json())
+    .then((res)=> setEmployees(res))
   }
 
   function removeEmployees(id){
-    console.log("deleting ...")
     fetch(baseURL+`/${id}`, {method: 'DELETE'})
     .then(setTimeout(function() {
       retrieveEmployees()
     }, 500))
   }
 
-  useEffect(() => { loadInitial() }, []) // componentDidMount
+  useEffect(() => {  
   
   async function loadInitial() {
-    const initialTodos = await get('')
-    if (response.ok) setEmployees(initialTodos)
+    retrieveEmployees()
   }
-
-  // useEffect(() => {
-  //   // console.log("First Fetch", data)
-  //   if(loading){
-  //     console.log("loading...")
-  //   }
-  //   if(error){
-  //     console.log("error...")
-  //   }
-  //   if(data !== [] && employees === []){
-  //     setEmployees(data)
-      
-  //   }
-  //   else{
-  //     loadEmployees()
-
-  //   }
-  // }, [error, loading, data, employees]) 
-
-
-  // async function loadEmployees(){
-  //   const newEmployees = await get()
-  //   console.log("Dentro da busca ",newEmployees)
-    
-  //   setTimeout(function() {
-  //     setEmployees(newEmployees)
-  //   }, 500)
+  
+  // async function loadInitial() {
+  //   await get('')
+  //   var e = await response.json()
+  //   if (response.ok) setEmployees(e)
   // }
-  // async function removeEmployee(e) {
-  //   fetch(baseURL+`/${e}`, {method: 'DELETE'})
-    
-  //   setTimeout(function() {
-  //     setEmployees([])
-  //   }, 500)
-  //   }
+
+  loadInitial() }, []) // componentDidMount
 
   return (
     <>
-      
       <div className="page">
         <h1 className="page-title">LISTA DE FUNCIONARIOS</h1>
-
         <h2 className="options-title">Opções:</h2>
         <div className="page-buttons">
           <div className="page-button-container">
@@ -115,8 +77,8 @@ export function ListUser() {
             </thead>
             {loading && <div> <h1> Loading....</h1> </div>}
             {error && <p>ERROR... </p>}
-            {data && 
-            data.map((e) => {
+            {employees && 
+            employees.map((e) => {
               return (
                 <tbody>
                   <tr>
@@ -129,7 +91,7 @@ export function ListUser() {
                       <NavigationButton
                         class="navigate-button"
                         routeToNavigate={`/get/${e._id}`}
-                        name="Ver Detalhes"
+                        name="Editar"
                         />
                     </td>
                     <td>

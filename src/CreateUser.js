@@ -11,18 +11,7 @@ const baseURL = `https://mack-webmobile.vercel.app/api/users`;
 export function CreateUser() {
 
   const navigate = useNavigate();
-
-  const opt = {
-    method: 'POST',
-    mode: 'cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    redirect: 'follow',
-    referrerPolicy: 'no-referrer'
-  }
+  
   const { post, response  } = useFetch(baseURL)
 
   const newUser = async (event) => {
