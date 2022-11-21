@@ -32,3 +32,21 @@
 .page__table tbody {
   height: 7vh;
 }
+
+.filter-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.filter{
+  width: 40vw;
+  display: flex;
+  align-items: center;
+}
+
+#filter-title{
+  width: 8vw;
+  margin-top: 0;
+}
