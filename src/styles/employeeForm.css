@@ -1,0 +1,48 @@
+.label-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.label-container label {
+  margin: 5px;
+}
+
+.label-container label input {
+  background-color: #dddd;
+  border: none;
+  height: 2.5vh;
+  width: 100%;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+}
+
+.input-title {
+  margin-top: 25px;
+  font-family: "Roboto Condensed", sans-serif;
+  text-align: left;
+  padding: 0px;
+}
+
+.status-label {
+  display: flex;
+  justify-content: space-between;
+}
+.options-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2.5vh;
+}
+
+.option {
+  margin: 2px;
+}
+
+.form {
+  border: 1.5px solid #dddd;
+  border-radius: 10px;
+  padding: 1%;
+}

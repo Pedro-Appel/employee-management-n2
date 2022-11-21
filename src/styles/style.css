@@ -1,0 +1,20 @@
+* {
+  font-family: "Secular One", sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+.page,
+.page_get_user {
+  font-family: "Secular One", sans-serif;
+}
+
+.page-title,
+.options-title {
+  filter: drop-shadow(-3px 2px 3px rgba(126, 126, 126, 0.867));
+  text-align: center;
+}
+
+.page-title {
+  padding: 2%;
+}
