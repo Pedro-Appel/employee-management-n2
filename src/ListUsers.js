@@ -8,7 +8,6 @@ const baseURL = `https://mack-webmobile.vercel.app/api/users`;
 
 export function ListUser() {
   const [employees, setEmployees] = useState([]);
-  const [filtered, setFiltered] = useState([]);
 
   const options = { cache: "no-cache" };
   const { loading, error } = useFetch(
