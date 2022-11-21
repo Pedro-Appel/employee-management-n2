@@ -40,54 +40,37 @@ export function CreateUser() {
       <div className="form-container">
         <form className="form" onSubmit={newUser}>
           <div className="label-container">
-            <label>
-              <div className="label-title">Name</div>
-              <input type="text" name="name" />
-            </label>
 
-            <label>
-              <div className="label-title">Email</div>
-              <input type="text" name="email" />
-            </label>
+            <div className='input-title'>Nome</div>
+            <input className="w3-input w3-animate-input" type="text" name="name"/>
 
-            <label>
-              <div className="label-title">Salário</div>
-              <input type="text" name="salary" />
-            </label>
+            <div className='input-title'>Email</div>
+            <input className="w3-input w3-animate-input" type="text" name="email" />
 
-            <label>
-              <div className="label-title">Data</div>
-              <input type="text" name="date" />
-            </label>
+            <div className='input-title'>Salário</div>
+            <input className="w3-input w3-animate-input" type="text" name="salary" />
 
-            <label>
-              <div className="label-title">Link da Foto</div>
-              <input type="text" name="avatar" />
-            </label>
+            <div className='input-title' >Data</div>
+            <input className="w3-input w3-animate-input" type="text" name="date" />
 
-            <label className="status-label">
-              <div className="label-title">Status</div>
-              <select type="text" name="status">
-                <option value="Active">Active</option>
-                <option value="Inactive">Inactive</option>
-              </select>
-            </label>
+            <div className='input-title'>Link da Foto</div>
+            <input className="w3-input w3-animate-input" type="text" name="avatar" />
+
+            
+            <div className='input-title'>Status</div>
+            <select className="w3-select" type="text" name="status">
+              <option value="" disabled selected>Escolha um status</option>
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+
           </div>
-          <div className="options-container">
-            <div className="option">
-              <input
-                className="option-button"
-                type="submit"
-                value="Adicionar"
-              />
-            </div>
-            <div className="option">
-              <NavigationButton
-                class="back-button"
-                routeToNavigate="/"
-                name="Voltar"
-              />
-            </div>
+          <div className="page-button-wrap">
+            
+              <input className="option-button" type="submit"value="Adicionar"/>
+              
+              <NavigationButton class="back-button" routeToNavigate="/" name="Voltar"/>
+
           </div>
         </form>
       </div>

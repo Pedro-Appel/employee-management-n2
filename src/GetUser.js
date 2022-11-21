@@ -77,34 +77,26 @@ export function GetUser() {
             {error && <h1>failed when loading...</h1>}
             {(!loading && !error && selectedEmployee) && 
               <form onSubmit={updateEmployee}>
-                <h3>Foto</h3>
+                
                 <img className='card-image' src={selectedEmployee.avatar} alt='user'></img>
 
-                <h3>Name</h3>
-                <label>
-                  <input name="name" placeholder={selectedEmployee.name}></input>
-                </label>
+                <div className='input-title'>Name</div>
+                <input className="w3-input w3-animate-input" name="name" placeholder={selectedEmployee.name}></input>
 
-                <h3>Email</h3>
-                <label>
-                  <input name="email" placeholder={selectedEmployee.email}></input>
-                </label>
+                <div className='input-title'>Email</div>
+                <input className="w3-input w3-animate-input" name="email" placeholder={selectedEmployee.email}></input>
 
-                <h3>Salary</h3>
-                <label>
-                <input name="salary" placeholder={selectedEmployee.salary}></input>
-                </label>
+                <div className='input-title'>Salary</div>
+                <input className="w3-input w3-animate-input" name="salary" placeholder={selectedEmployee.salary}></input>
 
-                <h3>Date</h3>
-                <label>
-                <input name="date" placeholder={selectedEmployee.date}></input>
-                </label>
+                <div className='input-title'>Date</div>
+                <input className="w3-input w3-animate-input" name="date" placeholder={selectedEmployee.date}></input>
                 
-                <h3>Status</h3>
-                <select type="text" name="status">
-                <option value="Escolher">Escolher</option>
-                <option value="Active">Active</option>
-                <option value="Inactive">Inactive</option>
+                <div className='input-title'>Status</div>
+                <select className="w3-select" type="text" name="status">
+                  <option value="">{selectedEmployee.status}</option>
+                  <option value="Active">Active</option>
+                  <option value="Inactive">Inactive</option>
                 </select>
                 <div className="options-container">
                   <NavigationButton class="back-button" routeToNavigate="/" name="Voltar"/>

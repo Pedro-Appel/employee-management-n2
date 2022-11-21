@@ -46,8 +46,7 @@ export function ListUser() {
     <>
       <div className="page">
         <h1 className="page-title">LISTA DE FUNCIONARIOS</h1>
-        <h2 className="options-title">Opções:</h2>
-        <div className="page-buttons">
+        <div className="page-button-wrap">
           <div className="page-button-container">
             <NavigationButton
               class="option-button"
@@ -61,7 +60,6 @@ export function ListUser() {
             </button>
           </div>
         </div>
-
         <div className="page-tables">
           <table className="page__table">
             <thead>
@@ -105,6 +103,9 @@ export function ListUser() {
             })}
           </table>
         </div>
+
+        
+
     </div>
   </>
   );
