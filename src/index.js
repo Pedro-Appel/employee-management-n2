@@ -13,7 +13,6 @@ root.render(
       <Route exact path='/' element={<ListUser/>} />
       <Route exact path='/get/:id' element={<GetUser/>} />
       <Route exact path='/create' element={<CreateUser/>} />
-      <Route exact path='/update' element={<UpdateUser/>} />
     </Routes>
   </BrowserRouter>
 );
