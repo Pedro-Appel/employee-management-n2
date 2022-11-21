@@ -8,6 +8,7 @@ const baseURL = `https://mack-webmobile.vercel.app/api/users`;
 
 export function ListUser() {
   const [employees, setEmployees] = useState([]);
+  const [filtered, setFiltered] = useState([]);
 
   const options = { cache: "no-cache" };
   const { loading, error } = useFetch(
@@ -15,9 +16,12 @@ export function ListUser() {
     options
   );
 
-  async function retrieveEmployees() {
+  async function retrieveEmployees(orderBy) {
+    if(orderBy === undefined)
+      orderBy='_id'
     fetch(baseURL, options)
       .then((res) => res.json())
+      .then((res)=> res.sort(GetSortOrder(orderBy)))
       .then((res) => setEmployees(res));
   }
 
@@ -29,22 +33,33 @@ export function ListUser() {
     );
   }
 
-  function selectFilter() {
-    var select = document.getElementById("filter-select");
+  function orderFilter() {
+    var select = document.getElementById("order-select");
     var value = select.options[select.selectedIndex].value;
-    if (value == "Active") {
-      filterEmployeesByStatus(value);
-      console.log(employees)
-    } 
-    if (value == "Inactive") {
-      filterEmployeesByStatus(value);
-    }
-    console.log(employees)
+    retrieveEmployees(value)
   }
 
-  function filterEmployeesByStatus(status) {
-    var result = employees.filter((employee) => employee.status == status);
-    setEmployees(result);
+  function GetSortOrder(prop) {    
+    return function(a, b) {    
+        if (a[prop] > b[prop]) {    
+            return 1;    
+        } else if (a[prop] < b[prop]) {    
+            return -1;    
+        }    
+        return 0;    
+    }    
+  }   
+
+
+  function selectFilter() {
+
+    var select = document.getElementById("filter-select");
+    var value = select.options[select.selectedIndex].value;
+
+    fetch(baseURL, options)
+      .then((res) => res.json())
+      .then((res)=> res.filter(res=> res.status === value))
+      .then((res) => setEmployees(res));
   }
 
   useEffect(() => {
@@ -80,19 +95,31 @@ export function ListUser() {
           </div>
         </div>
         <div className="filter-container">
+
           <div className="filter">
-            <div id="filter-title" className="input-title">
-              Filtrar por:
-            </div>
-            <select id="filter-select" className="w3-select" type="text" name="status">
-              <option value="" disabled selected></option>
-              <option value="Active">Active</option>
-              <option value="Inactive">Inactive</option>
+            <select id="order-select"  type="text" name="status">
+              <option value="">Ordenar por ...</option>
+              <option value="status">Status</option>
+              <option value="name">Nome</option>
+              <option value="salary">Salario</option>
+              <option value="date">Data</option>
             </select>
-            <button className="option-button" onClick={() => retrieveEmployees().then(selectFilter())}>
+            <button className="option-button" onClick={() => orderFilter()}>
+              Ordenar
+            </button>
+          </div>
+
+          <div className="filter">
+            <select id="filter-select"  type="text" name="status">
+              <option value="">Filtrar por status...</option>
+              <option value="Active">Ativo</option>
+              <option value="Inactive">Inativo</option>
+            </select>
+            <button className="option-button" onClick={() => selectFilter()}>
               Filtrar
             </button>
           </div>
+
         </div>
         <br></br>
         <div className="page-tables">

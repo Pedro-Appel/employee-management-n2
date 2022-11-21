@@ -33,20 +33,30 @@
   height: 7vh;
 }
 
-.filter-container{
+.filter-container {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
-.filter{
-  width: 40vw;
+.filter {
   display: flex;
+  margin-top: 10px;
+  margin-right: 55px;
   align-items: center;
 }
 
-#filter-title{
+#filter-title {
   width: 8vw;
+  margin-right: -60px;
   margin-top: 0;
+}
+#filter-select {
+  width: 8vw;
+  margin-right: 10px;
+}
+#order-select {
+  width: 8vw;
+  margin-right: 10px;
 }
