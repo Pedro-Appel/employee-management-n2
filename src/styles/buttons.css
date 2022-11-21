@@ -1,6 +1,6 @@
 button,
 .option-button {
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0);
   border-radius: 10px;
   color: white;
   text-align: center;
@@ -13,6 +13,7 @@ button,
 
 .navigate-button {
   background-color: #008cba;
+  border: 1px solid rgba(255, 255, 255, 0);
   padding: 10px 27px;
 }
 .navigate-button:hover {
@@ -25,6 +26,7 @@ button,
 
 .delete-button {
   background-color: #f44336;
+  border: 1px solid rgba(255, 255, 255, 0);
   width: 25px;
   height: 25px;
 }
@@ -34,11 +36,13 @@ button,
 
 .back-button {
   background-color: #f44336;
+  border: 1px solid rgba(255, 255, 255, 0);
   padding: 10px 27px;
 }
 
 .option-button {
   background-color: #4caf50;
+  border: 1px solid rgba(255, 255, 255, 0);
   padding: 10px 27px;
   margin-left: 5px;
 }
